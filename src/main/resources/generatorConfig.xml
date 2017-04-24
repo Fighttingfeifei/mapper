@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generatorConfig.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/><!--前缀-->
+        <property name="endingDelimiter" value="`"/><!--后缀-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="${mapper.plugin}"><!--这个mapper是确立的resources里边的mapper-->
+            <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+        <!--连接数据库  c3p0方式-->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+
+        <!--${basedir}/src/main/java  com.fengze.shop.model   我们生成这些文件  $所在的顶级目录，$所在的包-->
+        <javaModelGenerator targetPackage="${targetModelPackage}" targetProject="${targetJavaProject}"/>
+        <!--生成的Mapper映射文件路径-->
+        <sqlMapGenerator targetPackage="${targetXMLPackage}" targetProject="${targetResourcesProject}"/>
+        <!--生成mappser接口-->
+        <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER"/>
+
+        <table tableName="TB_USER" domainObjectName="UserOk">
+            <!--   tableName对应的是数据库表名     column声称主键所对应的名字   identity自增-->
+            <generatedKey column="USER_ID" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="GOODS_" domainObjectName="UserDo">
+            <generatedKey column="ID" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
